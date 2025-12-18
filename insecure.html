@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XSS Insecure Demo</title>
+</head>
+<body>
+
+  <h2>Leave a Comment (Insecure Page)</h2>
+
+  <!-- 👇 YAHAN payload likha hua hai -->
+  <input type="text" id="comment"
+         value="<script>alert('XSS Attack!')</script>">
+
+  <button onclick="postComment()">Post</button>
+
+  <div id="output"></div>
+
+  <script>
+    function postComment() {
+      const userInput = document.getElementById("comment").value;
+
+      // ❌ No validation, no sanitization
+      document.getElementById("output").innerHTML =
+        "<p>User Comment: " + userInput + "</p>";
+    }
+  </script>
+
+</body>
+</html>

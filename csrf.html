@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSRF Protection Demo</title>
+</head>
+<body>
+
+  <h2>Secure Form with CSRF Token</h2>
+
+  <form onsubmit="return submitForm()">
+    <input type="text" placeholder="Username" required>
+
+    <!-- Mock CSRF Token -->
+    <input type="hidden" id="csrfToken" value="abc123securetoken">
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    function submitForm() {
+      const token = document.getElementById("csrfToken").value;
+
+      // Mock server validation
+      if (token === "abc123securetoken") {
+        document.getElementById("status").innerText =
+          "Form submitted successfully (Token Valid)";
+      } else {
+        document.getElementById("status").innerText =
+          "CSRF Attack Detected!";
+      }
+      return false;
+    }
+  </script>
+
+</body>
+</html>
